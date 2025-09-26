@@ -17,14 +17,14 @@ Objectives
 
 DataSet 
 The data for this project is sourced from the Kaggle dataset.
-* Dataset Link: https://www.kaggle.com/datasets/shivamb/netflix-shows
+* Dataset Link: https://www.kaggle.com/datasets/shivamb/netflix-shows.
 
- * Schema
+## 📌 Schema
 
-  DROP TABLE IF EXISTS netflix;
+```sql
+DROP TABLE IF EXISTS netflix;
 
-CREATE TABLE netflix
-(
+CREATE TABLE netflix (
     show_id       VARCHAR(5),
     type          VARCHAR(10),
     title         VARCHAR(250),
@@ -38,6 +38,7 @@ CREATE TABLE netflix
     listed_in     VARCHAR(250),
     description   VARCHAR(550)
 );
+
 
 Business Problems and Solutions
 
