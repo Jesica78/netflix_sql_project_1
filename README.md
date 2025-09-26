@@ -44,7 +44,7 @@ Business Problems and Solutions
 
 #  Netflix SQL Case Study  
 
-## 1️⃣ Count the number of Movies vs TV Shows
+1. Count the number of Movies vs TV Shows
 ```sql
 SELECT 
     type,
@@ -52,7 +52,7 @@ SELECT
 FROM netflix
 GROUP BY 1;
 
-## 2️⃣ Most common rating for Movies and TV Shows
+2. Most common rating for Movies and TV Shows
 SELECT 
     type,
     rating
@@ -67,13 +67,13 @@ FROM (
 ) AS t1
 WHERE ranking = 1;
 
-##3️⃣ List all Movies released in a specific year (e.g., 2020)
+3. List all Movies released in a specific year (e.g., 2020)
 SELECT *
 FROM netflix
 WHERE type = 'Movie'
   AND release_year = 2020;
 
-##4️⃣ Top 5 countries with the most content on Netflix
+4. Top 5 countries with the most content on Netflix
 SELECT
     UNNEST(STRING_TO_ARRAY(country, ',')) AS new_country,
     COUNT(show_id) AS total_content
@@ -82,7 +82,7 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5;
 
-##5️⃣ Identify the longest Movie
+5. Identify the longest Movie
 SELECT *
 FROM netflix
 WHERE type = 'Movie'
@@ -91,30 +91,30 @@ WHERE type = 'Movie'
       FROM netflix
       WHERE type = 'Movie'
   );
-##6️⃣ Content added in the last 5 years
+6. Content added in the last 5 years
 SELECT *
 FROM netflix
 WHERE TO_DATE(date_added, 'Month,DD,YYYY') >= CURRENT_DATE - INTERVAL '5 years';
 
-##7️⃣ All Movies/TV Shows by director 'Rajiv Chilaka'
+7. All Movies/TV Shows by director 'Rajiv Chilaka'
 SELECT *
 FROM netflix  
 WHERE director = 'Rajiv Chilaka';
 
-##8️⃣ TV Shows with more than 5 seasons
+8. TV Shows with more than 5 seasons
 SELECT *
 FROM netflix
 WHERE type = 'TV Show'
   AND SPLIT_PART(duration, ' ', 1)::NUMERIC > 5;
 
-##9️⃣ Number of content items in each genre
+9. Number of content items in each genre
 SELECT
     UNNEST(STRING_TO_ARRAY(listed_in, ',')) AS genre,
     COUNT(show_id) AS total_content
 FROM netflix
 GROUP BY 1;
 
-##🔟 Yearly content release in India (Top 5 Years with highest avg %)
+10. Yearly content release in India (Top 5 Years with highest avg %)
 Total Content: 333/972
 SELECT
     EXTRACT(YEAR FROM TO_DATE(date_added, 'Month,DD,YYYY')) AS year,
@@ -129,23 +129,23 @@ GROUP BY 1
 ORDER BY yearly_content DESC
 LIMIT 5;
 
-##1️⃣1️⃣ List all Movies that are Documentaries
+11. List all Movies that are Documentaries
 SELECT *
 FROM netflix
 WHERE listed_in ILIKE '%Documentaries%';
 
-##1️⃣2️⃣ Find all content without a director
+12. Find all content without a director
 SELECT *
 FROM netflix
 WHERE director IS NULL;
 
-1️⃣3️⃣ Movies actor 'Salman Khan' appeared in (last 10 years)
+13. Movies actor 'Salman Khan' appeared in (last 10 years)
 SELECT *
 FROM netflix
 WHERE casts ILIKE '%Salman Khan%'
   AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
 
-##1️⃣4️⃣ Top 10 actors in Indian Movies
+14. Top 10 actors in Indian Movies
 SELECT
     UNNEST(STRING_TO_ARRAY(casts, ',')) AS actor,
     COUNT(*) AS total_content
@@ -155,7 +155,7 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 10;
 
-##1️⃣5️⃣ Categorize content based on keywords ('kill' / 'violence')
+15. Categorize content based on keywords ('kill' / 'violence')
 WITH new_table AS (
     SELECT *,
            CASE 
